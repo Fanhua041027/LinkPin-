@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - 智能面试评测系统</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>智能面试评测</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="interview.html" class="nav-link">开始面试</a></li>
+                <li><a href="dashboard.html" class="nav-link active">个人中心</a></li>
+                <li><a href="#" class="nav-link" id="logout-btn" data-action="logout">退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="dashboard-main">
+        <div class="container">
+            <!-- 侧边栏 -->
+            <aside class="sidebar">
+                <div class="user-profile">
+                    <div class="user-avatar">
+                        <img src="images/default-avatar.svg" alt="用户头像" id="user-avatar">
+                        <button class="avatar-edit-btn">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <div class="user-info">
+                        <h3 id="user-name">张同学</h3>
+                        <p id="user-school">清华大学 · 计算机科学与技术</p>
+                        <div class="user-level">
+                            <span class="level-badge">LV.5</span>
+                            <span class="level-title">面试达人</span>
+                        </div>
+                    </div>
+                </div>
+
+                <nav class="sidebar-nav">
+                    <ul>
+                        <li><a href="#overview" class="nav-item active" data-section="overview">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>总览</span>
+                        </a></li>
+                        <li><a href="#history" class="nav-item" data-section="history">
+                            <i class="fas fa-history"></i>
+                            <span>面试记录</span>
+                        </a></li>
+                        <li><a href="#growth" class="nav-item" data-section="growth">
+                            <i class="fas fa-chart-line"></i>
+                            <span>成长轨迹</span>
+                        </a></li>
+                        <li><a href="#recommendations" class="nav-item" data-section="recommendations">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>学习推荐</span>
+                        </a></li>
+                        <li><a href="#achievements" class="nav-item" data-section="achievements">
+                            <i class="fas fa-trophy"></i>
+                            <span>成就系统</span>
+                        </a></li>
+                        <li><a href="#certificates" class="nav-item" data-section="certificates">
+                            <i class="fas fa-certificate"></i>
+                            <span>能力证书</span>
+                        </a></li>
+                        <li><a href="#settings" class="nav-item" data-section="settings">
+                            <i class="fas fa-cog"></i>
+                            <span>设置</span>
+                        </a></li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- 主内容区 -->
+            <div class="main-content">
+                <!-- 总览页面 -->
+                <section id="overview" class="content-section active">
+                    <div class="section-header">
+                        <h2>个人总览</h2>
+                        <p>您的面试能力发展概况</p>
+                    </div>
+
+                    <!-- 统计卡片 -->
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-play-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">23</div>
+                                <div class="stat-label">总面试次数</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">18.5</div>
+                                <div class="stat-label">总练习时长(小时)</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">85</div>
+                                <div class="stat-label">平均得分</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-target"></i>
+                            </div>
+                            <div class="stat-content">
+                                <div class="stat-number">92%</div>
+                                <div class="stat-label">目标达成率</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 能力雷达图 -->
+                    <div class="overview-charts">
+                        <div class="chart-card">
+                            <h3>当前能力分析</h3>
+                            <div class="radar-container">
+                                <canvas id="overview-radar" width="300" height="300"></canvas>
+                            </div>
+                        </div>
+                        <div class="chart-card">
+                            <h3>近期表现趋势</h3>
+                            <div class="trend-chart">
+                                <canvas id="trend-chart" width="400" height="200"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 最近活动 -->
+                    <div class="recent-activity">
+                        <h3>最近活动</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">完成人工智能工程师模拟面试</div>
+                                    <div class="activity-meta">2024-01-15 14:30 · 得分: 88分</div>
+                                </div>
+                                <div class="activity-score">88</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-trophy"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">获得成就: 面试新手</div>
+                                    <div class="activity-meta">2024-01-14 16:20</div>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <div class="activity-title">完成推荐学习: 算法面试题精讲</div>
+                                    <div class="activity-meta">2024-01-13 20:15</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 面试记录页面 -->
+                <section id="history" class="content-section">
+                    <div class="section-header">
+                        <h2>面试记录</h2>
+                        <div class="header-actions">
+                            <div class="filter-group">
+                                <select id="position-filter">
+                                    <option value="all">全部岗位</option>
+                                    <option value="ai">人工智能工程师</option>
+                                    <option value="bigdata">大数据工程师</option>
+                                    <option value="iot">物联网工程师</option>
+                                    <option value="pm">产品经理</option>
+                                </select>
+                                <select id="mode-filter">
+                                    <option value="all">全部模式</option>
+                                    <option value="free">自由练习</option>
+                                    <option value="timed">限时模拟</option>
+                                    <option value="focused">专项训练</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="history-list">
+                        <div class="history-item">
+                            <div class="history-header">
+                                <div class="history-info">
+                                    <h4>人工智能工程师 - 限时模拟</h4>
+                                    <div class="history-meta">
+                                        <span><i class="fas fa-calendar"></i> 2024-01-15 14:30</span>
+                                        <span><i class="fas fa-clock"></i> 42分钟</span>
+                                        <span><i class="fas fa-question-circle"></i> 10题</span>
+                                    </div>
+                                </div>
+                                <div class="history-score">
+                                    <div class="score-badge score-good">88</div>
+                                </div>
+                            </div>
+                            <div class="history-details">
+                                <div class="score-breakdown-mini">
+                                    <div class="score-item-mini">
+                                        <span>表达能力</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 90%"></div>
+                                        </div>
+                                        <span>90</span>
+                                    </div>
+                                    <div class="score-item-mini">
+                                        <span>逻辑思维</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 85%"></div>
+                                        </div>
+                                        <span>85</span>
+                                    </div>
+                                    <div class="score-item-mini">
+                                        <span>专业知识</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 92%"></div>
+                                        </div>
+                                        <span>92</span>
+                                    </div>
+                                    <div class="score-item-mini">
+                                        <span>应变能力</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 80%"></div>
+                                        </div>
+                                        <span>80</span>
+                                    </div>
+                                    <div class="score-item-mini">
+                                        <span>职业素养</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 88%"></div>
+                                        </div>
+                                        <span>88</span>
+                                    </div>
+                                </div>
+                                <div class="history-actions">
+                                    <button class="btn btn-sm btn-outline">查看详情</button>
+                                    <button class="btn btn-sm btn-secondary">重新练习</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="history-item">
+                            <div class="history-header">
+                                <div class="history-info">
+                                    <h4>大数据工程师 - 专项训练</h4>
+                                    <div class="history-meta">
+                                        <span><i class="fas fa-calendar"></i> 2024-01-12 16:45</span>
+                                        <span><i class="fas fa-clock"></i> 25分钟</span>
+                                        <span><i class="fas fa-question-circle"></i> 6题</span>
+                                    </div>
+                                </div>
+                                <div class="history-score">
+                                    <div class="score-badge score-excellent">92</div>
+                                </div>
+                            </div>
+                            <div class="history-details">
+                                <div class="score-breakdown-mini">
+                                    <div class="score-item-mini">
+                                        <span>表达能力</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 88%"></div>
+                                        </div>
+                                        <span>88</span>
+                                    </div>
+                                    <div class="score-item-mini">
+                                        <span>逻辑思维</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 95%"></div>
+                                        </div>
+                                        <span>95</span>
+                                    </div>
+                                    <div class="score-item-mini">
+                                        <span>专业知识</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 96%"></div>
+                                        </div>
+                                        <span>96</span>
+                                    </div>
+                                    <div class="score-item-mini">
+                                        <span>应变能力</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 90%"></div>
+                                        </div>
+                                        <span>90</span>
+                                    </div>
+                                    <div class="score-item-mini">
+                                        <span>职业素养</span>
+                                        <div class="score-bar-mini">
+                                            <div class="score-fill-mini" style="width: 91%"></div>
+                                        </div>
+                                        <span>91</span>
+                                    </div>
+                                </div>
+                                <div class="history-actions">
+                                    <button class="btn btn-sm btn-outline">查看详情</button>
+                                    <button class="btn btn-sm btn-secondary">重新练习</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pagination">
+                        <button class="btn btn-outline">上一页</button>
+                        <span class="page-info">第 1 页，共 3 页</span>
+                        <button class="btn btn-outline">下一页</button>
+                    </div>
+                </section>
+
+                <!-- 成长轨迹页面 -->
+                <section id="growth" class="content-section">
+                    <div class="section-header">
+                        <h2>成长轨迹</h2>
+                        <p>追踪您的面试能力发展历程</p>
+                    </div>
+
+                    <!-- 成长曲线 -->
+                    <div class="growth-chart-container">
+                        <h3>能力发展曲线</h3>
+                        <div class="chart-controls">
+                            <div class="time-range">
+                                <button class="time-btn active" data-range="7d">7天</button>
+                                <button class="time-btn" data-range="30d">30天</button>
+                                <button class="time-btn" data-range="90d">90天</button>
+                                <button class="time-btn" data-range="1y">1年</button>
+                            </div>
+                            <div class="ability-selector">
+                                <select id="ability-select">
+                                    <option value="overall">综合能力</option>
+                                    <option value="expression">表达能力</option>
+                                    <option value="logic">逻辑思维</option>
+                                    <option value="knowledge">专业知识</option>
+                                    <option value="adaptability">应变能力</option>
+                                    <option value="professionalism">职业素养</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="growth-chart">
+                            <canvas id="growth-chart" width="800" height="400"></canvas>
+                        </div>
+                    </div>
+
+                    <!-- 里程碑 -->
+                    <div class="milestones">
+                        <h3>成长里程碑</h3>
+                        <div class="milestone-timeline">
+                            <div class="milestone-item completed">
+                                <div class="milestone-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="milestone-content">
+                                    <h4>首次面试</h4>
+                                    <p>完成第一次模拟面试</p>
+                                    <span class="milestone-date">2024-01-01</span>
+                                </div>
+                            </div>
+                            <div class="milestone-item completed">
+                                <div class="milestone-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <div class="milestone-content">
+                                    <h4>能力提升</h4>
+                                    <p>综合得分突破80分</p>
+                                    <span class="milestone-date">2024-01-08</span>
+                                </div>
+                            </div>
+                            <div class="milestone-item current">
+                                <div class="milestone-icon">
+                                    <i class="fas fa-target"></i>
+                                </div>
+                                <div class="milestone-content">
+                                    <h4>专业精进</h4>
+                                    <p>专业知识得分达到90分</p>
+                                    <span class="milestone-date">进行中</span>
+                                </div>
+                            </div>
+                            <div class="milestone-item">
+                                <div class="milestone-icon">
+                                    <i class="fas fa-crown"></i>
+                                </div>
+                                <div class="milestone-content">
+                                    <h4>面试达人</h4>
+                                    <p>综合得分突破90分</p>
+                                    <span class="milestone-date">待完成</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 同岗位对比 -->
+                    <div class="peer-comparison">
+                        <h3>同岗位优秀面试者对比</h3>
+                        <div class="comparison-chart">
+                            <canvas id="comparison-chart" width="600" height="300"></canvas>
+                        </div>
+                        <div class="comparison-insights">
+                            <div class="insight-item">
+                                <i class="fas fa-arrow-up text-success"></i>
+                                <span>您的专业知识得分超过了78%的同岗位面试者</span>
+                            </div>
+                            <div class="insight-item">
+                                <i class="fas fa-arrow-down text-warning"></i>
+                                <span>应变能力有待提升，建议加强相关训练</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 学习推荐页面 -->
+                <section id="recommendations" class="content-section">
+                    <div class="section-header">
+                        <h2>个性化学习推荐</h2>
+                        <p>基于您的薄弱环节定制的学习资源</p>
+                    </div>
+
+                    <!-- 薄弱环节分析 -->
+                    <div class="weakness-analysis">
+                        <h3>薄弱环节分析</h3>
+                        <div class="weakness-grid">
+                            <div class="weakness-card priority-high">
+                                <div class="weakness-header">
+                                    <h4>应变能力</h4>
+                                    <span class="priority-badge">高优先级</span>
+                                </div>
+                                <div class="weakness-score">78分</div>
+                                <p>在压力面试和突发问题处理方面需要加强</p>
+                                <div class="improvement-potential">+12分提升空间</div>
+                            </div>
+                            <div class="weakness-card priority-medium">
+                                <div class="weakness-header">
+                                    <h4>逻辑思维</h4>
+                                    <span class="priority-badge">中优先级</span>
+                                </div>
+                                <div class="weakness-score">82分</div>
+                                <p>回答结构化程度有待提升</p>
+                                <div class="improvement-potential">+8分提升空间</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 推荐学习资源 -->
+                    <div class="learning-resources">
+                        <h3>推荐学习资源</h3>
+                        <div class="resource-categories">
+                            <div class="category-tabs">
+                                <button class="tab-btn active" data-category="courses">在线课程</button>
+                                <button class="tab-btn" data-category="articles">文章资料</button>
+                                <button class="tab-btn" data-category="practice">练习题库</button>
+                                <button class="tab-btn" data-category="videos">视频教程</button>
+                            </div>
+                            
+                            <div class="resource-content">
+                                <div class="resource-list" id="courses-list">
+                                    <div class="resource-item">
+                                        <div class="resource-image">
+                                            <img src="images/course-1.svg" alt="课程封面">
+                                        </div>
+                                        <div class="resource-info">
+                                            <h4>压力面试应对技巧</h4>
+                                            <p>学习如何在高压环境下保持冷静，提升应变能力</p>
+                                            <div class="resource-meta">
+                                                <span><i class="fas fa-clock"></i> 2小时</span>
+                                                <span><i class="fas fa-star"></i> 4.8分</span>
+                                                <span><i class="fas fa-users"></i> 1.2k学习</span>
+                                            </div>
+                                        </div>
+                                        <div class="resource-actions">
+                                            <button class="btn btn-primary">开始学习</button>
+                                        </div>
+                                    </div>
+                                    <div class="resource-item">
+                                        <div class="resource-image">
+                                            <img src="images/course-2.svg" alt="课程封面">
+                                        </div>
+                                        <div class="resource-info">
+                                            <h4>STAR法则实战训练</h4>
+                                            <p>掌握结构化表达方法，提升逻辑思维能力</p>
+                                            <div class="resource-meta">
+                                                <span><i class="fas fa-clock"></i> 1.5小时</span>
+                                                <span><i class="fas fa-star"></i> 4.9分</span>
+                                                <span class="recommended-badge">推荐</span>
+                                            </div>
+                                        </div>
+                                        <div class="resource-actions">
+                                            <button class="btn btn-primary">开始学习</button>
+                                        </div>
+                                    </div>
+                                    <div class="resource-item">
+                                        <div class="resource-image">
+                                            <img src="images/course-3.svg" alt="课程封面">
+                                        </div>
+                                        <div class="resource-info">
+                                            <h4>技术面试突破指南</h4>
+                                            <p>深入解析技术面试核心要点，提升专业表达能力</p>
+                                            <div class="resource-meta">
+                                                <span><i class="fas fa-clock"></i> 3小时</span>
+                                                <span><i class="fas fa-star"></i> 4.7分</span>
+                                                <span><i class="fas fa-users"></i> 2.1k学习</span>
+                                            </div>
+                                        </div>
+                                        <div class="resource-actions">
+                                            <button class="btn btn-primary">开始学习</button>
+                                        </div>
+                                    </div>
+                                    <div class="resource-item">
+                                        <div class="resource-image">
+                                            <img src="images/course-4.svg" alt="课程封面">
+                                        </div>
+                                        <div class="resource-info">
+                                            <h4>行为面试精讲课程</h4>
+                                            <p>掌握行为面试技巧，展现个人软实力和团队协作能力</p>
+                                            <div class="resource-meta">
+                                                <span><i class="fas fa-clock"></i> 2.5小时</span>
+                                                <span><i class="fas fa-star"></i> 4.6分</span>
+                                                <span><i class="fas fa-users"></i> 980学习</span>
+                                            </div>
+                                        </div>
+                                        <div class="resource-actions">
+                                            <button class="btn btn-primary">开始学习</button>
+                                        </div>
+                                    </div>
+                                    <div class="resource-item">
+                                        <div class="resource-image">
+                                            <img src="images/course-5.svg" alt="课程封面">
+                                        </div>
+                                        <div class="resource-info">
+                                            <h4>沟通表达能力提升</h4>
+                                            <p>提升语言表达和沟通技巧，增强面试自信心</p>
+                                            <div class="resource-meta">
+                                                <span><i class="fas fa-clock"></i> 1.8小时</span>
+                                                <span><i class="fas fa-star"></i> 4.5分</span>
+                                                <span class="recommended-badge">热门</span>
+                                            </div>
+                                        </div>
+                                        <div class="resource-actions">
+                                            <button class="btn btn-primary">开始学习</button>
+                                        </div>
+                                    </div>
+                                    <div class="resource-item">
+                                        <div class="resource-image">
+                                            <img src="images/course-6.svg" alt="课程封面">
+                                        </div>
+                                        <div class="resource-info">
+                                            <h4>职场礼仪与形象管理</h4>
+                                            <p>学习专业的职场礼仪，塑造良好的个人形象</p>
+                                            <div class="resource-meta">
+                                                <span><i class="fas fa-clock"></i> 1.2小时</span>
+                                                <span><i class="fas fa-star"></i> 4.4分</span>
+                                                <span><i class="fas fa-users"></i> 756学习</span>
+                                            </div>
+                                        </div>
+                                        <div class="resource-actions">
+                                            <button class="btn btn-primary">开始学习</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 学习计划 -->
+                    <div class="learning-plan">
+                        <h3>个性化学习计划</h3>
+                        <div class="plan-timeline">
+                            <div class="plan-week">
+                                <h4>第1周 - 应变能力强化</h4>
+                                <div class="plan-tasks">
+                                    <div class="task-item completed">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>完成压力面试课程学习</span>
+                                    </div>
+                                    <div class="task-item">
+                                        <i class="fas fa-circle"></i>
+                                        <span>练习5道压力面试题目</span>
+                                    </div>
+                                    <div class="task-item">
+                                        <i class="fas fa-circle"></i>
+                                        <span>参加模拟压力面试</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="plan-week">
+                                <h4>第2周 - 逻辑思维提升</h4>
+                                <div class="plan-tasks">
+                                    <div class="task-item">
+                                        <i class="fas fa-circle"></i>
+                                        <span>学习STAR法则课程</span>
+                                    </div>
+                                    <div class="task-item">
+                                        <i class="fas fa-circle"></i>
+                                        <span>练习结构化表达</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 成就系统页面 -->
+                <section id="achievements" class="content-section">
+                    <div class="section-header">
+                        <h2>成就系统</h2>
+                        <p>记录您的每一个进步时刻</p>
+                    </div>
+
+                    <!-- 成就统计 -->
+                    <div class="achievement-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">8</div>
+                            <div class="stat-label">已获得成就</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">1250</div>
+                            <div class="stat-label">总积分</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">5</div>
+                            <div class="stat-label">当前等级</div>
+                        </div>
+                    </div>
+
+                    <!-- 成就列表 -->
+                    <div class="achievements-grid">
+                        <div class="achievement-card unlocked">
+                            <div class="achievement-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>面试新手</h4>
+                                <p>完成第一次模拟面试</p>
+                                <div class="achievement-date">2024-01-01 获得</div>
+                            </div>
+                            <div class="achievement-points">+50积分</div>
+                        </div>
+                        
+                        <div class="achievement-card unlocked">
+                            <div class="achievement-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>稳步提升</h4>
+                                <p>连续5次面试得分提升</p>
+                                <div class="achievement-date">2024-01-10 获得</div>
+                            </div>
+                            <div class="achievement-points">+100积分</div>
+                        </div>
+
+                        <div class="achievement-card unlocked">
+                            <div class="achievement-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>技术专家</h4>
+                                <p>专业知识得分达到90分</p>
+                                <div class="achievement-date">2024-01-12 获得</div>
+                            </div>
+                            <div class="achievement-points">+150积分</div>
+                        </div>
+
+                        <div class="achievement-card locked">
+                            <div class="achievement-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>面试达人</h4>
+                                <p>综合得分达到90分</p>
+                                <div class="achievement-progress">进度: 85/90</div>
+                            </div>
+                            <div class="achievement-points">+200积分</div>
+                        </div>
+
+                        <div class="achievement-card locked">
+                            <div class="achievement-icon">
+                                <i class="fas fa-fire"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>连击高手</h4>
+                                <p>连续10天进行面试练习</p>
+                                <div class="achievement-progress">进度: 6/10</div>
+                            </div>
+                            <div class="achievement-points">+300积分</div>
+                        </div>
+
+                        <div class="achievement-card locked">
+                            <div class="achievement-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <div class="achievement-info">
+                                <h4>全能选手</h4>
+                                <p>在所有岗位都获得80分以上</p>
+                                <div class="achievement-progress">进度: 2/4</div>
+                            </div>
+                            <div class="achievement-points">+500积分</div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 能力证书页面 -->
+                <section id="certificates" class="content-section">
+                    <div class="section-header">
+                        <h2>能力证书</h2>
+                        <p>展示您的面试能力认证</p>
+                    </div>
+
+                    <!-- 证书列表 -->
+                    <div class="certificates-grid">
+                        <div class="certificate-card">
+                            <div class="certificate-preview">
+                                <div class="certificate-content">
+                                    <div class="certificate-header">
+                                        <h3>面试能力认证证书</h3>
+                                        <div class="certificate-logo">
+                                            <i class="fas fa-graduation-cap"></i>
+                                        </div>
+                                    </div>
+                                    <div class="certificate-body">
+                                        <p>兹证明</p>
+                                        <h4>张同学</h4>
+                                        <p>在人工智能工程师岗位面试评测中</p>
+                                        <p>综合得分达到 <strong>88分</strong></p>
+                                        <p>特发此证，以资鼓励</p>
+                                    </div>
+                                    <div class="certificate-footer">
+                                        <div class="certificate-date">2024年1月15日</div>
+                                        <div class="certificate-seal">
+                                            <i class="fas fa-certificate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="certificate-actions">
+                                <button class="btn btn-primary">下载证书</button>
+                                <button class="btn btn-secondary">分享证书</button>
+                            </div>
+                        </div>
+
+                        <div class="certificate-card">
+                            <div class="certificate-preview">
+                                <div class="certificate-content">
+                                    <div class="certificate-header">
+                                        <h3>专项能力认证证书</h3>
+                                        <div class="certificate-logo">
+                                            <i class="fas fa-brain"></i>
+                                        </div>
+                                    </div>
+                                    <div class="certificate-body">
+                                        <p>兹证明</p>
+                                        <h4>张同学</h4>
+                                        <p>在专业知识评测中</p>
+                                        <p>得分达到 <strong>92分</strong></p>
+                                        <p>获得技术专家认证</p>
+                                    </div>
+                                    <div class="certificate-footer">
+                                        <div class="certificate-date">2024年1月12日</div>
+                                        <div class="certificate-seal">
+                                            <i class="fas fa-certificate"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="certificate-actions">
+                                <button class="btn btn-primary">下载证书</button>
+                                <button class="btn btn-secondary">分享证书</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 证书生成 -->
+                    <div class="certificate-generator">
+                        <h3>生成新证书</h3>
+                        <p>当您的面试表现达到一定标准时，可以生成相应的能力证书</p>
+                        <div class="generator-options">
+                            <div class="option-card">
+                                <h4>综合能力证书</h4>
+                                <p>要求: 综合得分 ≥ 85分</p>
+                                <div class="option-status available">
+                                    <i class="fas fa-check"></i>
+                                    <span>可生成</span>
+                                </div>
+                                <button class="btn btn-primary">生成证书</button>
+                            </div>
+                            <div class="option-card">
+                                <h4>岗位专精证书</h4>
+                                <p>要求: 单一岗位得分 ≥ 90分</p>
+                                <div class="option-status unavailable">
+                                    <i class="fas fa-lock"></i>
+                                    <span>暂不可用</span>
+                                </div>
+                                <button class="btn btn-outline" disabled>生成证书</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 设置页面 -->
+                <section id="settings" class="content-section">
+                    <div class="section-header">
+                        <h2>个人设置</h2>
+                        <p>管理您的账户和偏好设置</p>
+                    </div>
+
+                    <!-- 个人信息 -->
+                    <div class="settings-card">
+                        <h3>个人信息</h3>
+                        <form class="settings-form">
+                            <div class="form-group">
+                                <label>姓名</label>
+                                <input type="text" value="张同学" id="user-name-input">
+                            </div>
+                            <div class="form-group">
+                                <label>学校</label>
+                                <input type="text" value="清华大学" id="user-school-input">
+                            </div>
+                            <div class="form-group">
+                                <label>专业</label>
+                                <input type="text" value="计算机科学与技术" id="user-major-input">
+                            </div>
+                            <div class="form-group">
+                                <label>邮箱</label>
+                                <input type="email" value="zhang@example.com" id="user-email-input">
+                            </div>
+                            <button type="submit" class="btn btn-primary">保存更改</button>
+                        </form>
+                    </div>
+
+                    <!-- 面试偏好 -->
+                    <div class="settings-card">
+                        <h3>面试偏好</h3>
+                        <div class="preference-options">
+                            <div class="preference-item">
+                                <label>默认面试模式</label>
+                                <select id="default-mode">
+                                    <option value="free">自由练习</option>
+                                    <option value="timed" selected>限时模拟</option>
+                                    <option value="focused">专项训练</option>
+                                </select>
+                            </div>
+                            <div class="preference-item">
+                                <label>首选岗位</label>
+                                <select id="preferred-position">
+                                    <option value="ai" selected>人工智能工程师</option>
+                                    <option value="bigdata">大数据工程师</option>
+                                    <option value="iot">物联网工程师</option>
+                                    <option value="pm">产品经理</option>
+                                </select>
+                            </div>
+                            <div class="preference-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    启用语音分析
+                                </label>
+                            </div>
+                            <div class="preference-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" checked>
+                                    <span class="checkmark"></span>
+                                    启用视频分析
+                                </label>
+                            </div>
+                            <div class="preference-item">
+                                <label class="checkbox-label">
+                                    <input type="checkbox">
+                                    <span class="checkmark"></span>
+                                    接收学习推荐通知
+                                </label>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">保存偏好</button>
+                    </div>
+
+                    <!-- 隐私设置 -->
+                    <div class="settings-card">
+                        <h3>隐私设置</h3>
+                        <div class="privacy-options">
+                            <div class="privacy-item">
+                                <div class="privacy-info">
+                                    <h4>数据使用</h4>
+                                    <p>允许系统使用您的面试数据来改进AI分析算法</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="privacy-item">
+                                <div class="privacy-info">
+                                    <h4>成绩公开</h4>
+                                    <p>允许在排行榜中显示您的匿名成绩</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 账户管理 -->
+                    <div class="settings-card">
+                        <h3>账户管理</h3>
+                        <div class="account-actions">
+                            <button class="btn btn-outline">修改密码</button>
+                            <button class="btn btn-outline">导出数据</button>
+                            <button class="btn btn-danger">删除账户</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- 面试详情模态框 -->
+    <div id="interviewDetailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>面试详情</h2>
+                <div class="modal-header-actions">
+                    <button class="btn btn-download" onclick="downloadReport()" title="下载报告">
+                        <i class="fas fa-download"></i> 下载报告
+                    </button>
+                    <span class="close" onclick="hideInterviewDetailModal()">&times;</span>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="interview-detail-info">
+                    <div class="detail-section">
+                        <h3>基本信息</h3>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>练习模式：</label>
+                                <span id="detailMode">-</span>
+                            </div>
+                            <div class="info-item">
+                                <label>题目标题：</label>
+                                <span id="detailQuestionTitle">-</span>
+                            </div>
+                            <div class="info-item">
+                                <label>面试时间：</label>
+                                <span id="detailTime">-</span>
+                            </div>
+                            <div class="info-item">
+                                <label>总体得分：</label>
+                                <span id="detailScore" class="score-highlight">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h3>AI评测结果</h3>
+                        <div class="score-breakdown-detail" id="scoreBreakdownDetail">
+                            <div class="score-item-detail">
+                                <div class="score-label">
+                                    <i class="fas fa-comments"></i>
+                                    <span>表达能力</span>
+                                </div>
+                                <div class="score-bar-detail">
+                                    <div class="score-fill-detail" id="expression-fill"></div>
+                                </div>
+                                <span class="score-value" id="expression-score">0</span>
+                            </div>
+                            <div class="score-item-detail">
+                                <div class="score-label">
+                                    <i class="fas fa-brain"></i>
+                                    <span>逻辑思维</span>
+                                </div>
+                                <div class="score-bar-detail">
+                                    <div class="score-fill-detail" id="logic-fill"></div>
+                                </div>
+                                <span class="score-value" id="logic-score">0</span>
+                            </div>
+                            <div class="score-item-detail">
+                                <div class="score-label">
+                                    <i class="fas fa-book"></i>
+                                    <span>专业知识</span>
+                                </div>
+                                <div class="score-bar-detail">
+                                    <div class="score-fill-detail" id="knowledge-fill"></div>
+                                </div>
+                                <span class="score-value" id="knowledge-score">0</span>
+                            </div>
+                            <div class="score-item-detail">
+                                <div class="score-label">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>应变能力</span>
+                                </div>
+                                <div class="score-bar-detail">
+                                    <div class="score-fill-detail" id="adaptability-fill"></div>
+                                </div>
+                                <span class="score-value" id="adaptability-score">0</span>
+                            </div>
+                            <div class="score-item-detail">
+                                <div class="score-label">
+                                    <i class="fas fa-user-tie"></i>
+                                    <span>职业素养</span>
+                                </div>
+                                <div class="score-bar-detail">
+                                    <div class="score-fill-detail" id="professionalism-fill"></div>
+                                </div>
+                                <span class="score-value" id="professionalism-score">0</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section">
+                        <h3>详细评价</h3>
+                        <div class="ai-evaluation-text" id="aiEvaluationText">
+                            暂无详细评价
+                        </div>
+                    </div>
+                    
+                    <div class="detail-section" id="video-section" style="display: none;">
+                        <h3>面试视频</h3>
+                        <div class="video-container" id="videoContainer">
+                            <video id="detail-video" controls style="width: 100%; max-height: 400px;">
+                                您的浏览器不支持视频播放。
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-outline" onclick="hideInterviewDetailModal()">关闭</button>
+                <button class="btn btn-primary" onclick="downloadReport()">下载报告</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/global-logout.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>

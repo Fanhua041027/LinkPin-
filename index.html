@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智能模拟面试评测系统</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>智能面试评测</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">首页</a></li>
+                <li><a href="#features" class="nav-link">功能介绍</a></li>
+                <li><a href="interview.html" class="nav-link">开始面试</a></li>
+                <li><a href="dashboard.html" class="nav-link">个人中心</a></li>
+                <li><a href="login.html" class="nav-link login-btn">登录</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主页面内容 -->
+    <main>
+        <!-- 英雄区域 -->
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>智能模拟面试评测系统</h1>
+                <p>基于AI技术的多模态面试训练平台，助力高校学生提升面试能力</p>
+                <div class="hero-buttons">
+                    <a href="interview.html" class="btn btn-primary">立即开始面试</a>
+                    <a href="#features" class="btn btn-secondary">了解更多</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="interview-simulation">
+                    <div class="screen">
+                        <div class="avatar"></div>
+                        <div class="waveform"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 功能特色 -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2>核心功能</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>多岗位面试场景</h3>
+                        <p>支持AI、大数据、物联网、产品经理等技术岗位的专业面试模拟</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-radar"></i>
+                        </div>
+                        <h3>多维度智能评测</h3>
+                        <p>语音、视频、文本多模态分析，全方位评估面试表现</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-file-chart-line"></i>
+                        </div>
+                        <h3>智能反馈报告</h3>
+                        <p>可视化能力雷达图，精准定位问题并提供改进建议</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>个性化学习推荐</h3>
+                        <p>根据薄弱环节推荐定制化学习资源和训练计划</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <h3>用户成长体系</h3>
+                        <p>能力档案追踪、成就系统激励、电子证书生成</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <h3>响应式设计</h3>
+                        <p>支持PC端访问，适配各种设备和屏幕尺寸</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 面试模式 -->
+        <section class="interview-modes">
+            <div class="container">
+                <h2>面试训练模式</h2>
+                <div class="modes-grid">
+                    <div class="mode-card">
+                        <div class="mode-icon">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <h3>自由练习</h3>
+                        <p>无时间限制，随意选择题目进行练习</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="mode-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <h3>限时模拟</h3>
+                        <p>真实面试时间限制，模拟实际面试场景</p>
+                    </div>
+                    <div class="mode-card">
+                        <div class="mode-icon">
+                            <i class="fas fa-target"></i>
+                        </div>
+                        <h3>专项训练</h3>
+                        <p>针对特定能力维度进行专项强化训练</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 统计数据 -->
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">10,000+</div>
+                        <div class="stat-label">注册用户</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50,000+</div>
+                        <div class="stat-label">面试练习次数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">95%</div>
+                        <div class="stat-label">用户满意度</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">4+</div>
+                        <div class="stat-label">技术岗位覆盖</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>智能面试评测系统</h3>
+                    <p>专业的AI面试训练平台，助力学生职业发展</p>
+                </div>
+                <div class="footer-section">
+                    <h4>快速链接</h4>
+                    <ul>
+                        <li><a href="interview.html">开始面试</a></li>
+                        <li><a href="dashboard.html">个人中心</a></li>
+                        <li><a href="admin.html">管理员</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>联系我们</h4>
+                    <p>邮箱: support@interview-ai.com</p>
+                    <p>电话: 400-123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 智能面试评测系统. 保留所有权利.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/global-logout.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

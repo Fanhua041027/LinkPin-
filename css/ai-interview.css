@@ -1,0 +1,441 @@
+/* AI工程师面试页面专用样式 */
+
+.interview-container {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.interview-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.interview-info {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.position-info, .mode-info, .timer-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+}
+
+.position-info i {
+    color: #667eea;
+    font-size: 1.2em;
+}
+
+.mode-info i {
+    color: #f093fb;
+    font-size: 1.1em;
+}
+
+.timer-info i {
+    color: #ff6b6b;
+    font-size: 1.1em;
+}
+
+#interview-timer {
+    font-family: 'Courier New', monospace;
+    font-size: 1.2em;
+    color: #ff6b6b;
+    font-weight: bold;
+}
+
+.interview-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.interview-main {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 20px;
+    height: calc(100vh - 200px);
+}
+
+.video-section {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.interviewer-video {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.interviewer-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 3px solid #667eea;
+}
+
+.interviewer-name {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.1em;
+}
+
+.candidate-video {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    min-height: 0;
+}
+
+#user-video {
+    width: 100%;
+    flex: 1;
+    min-height: 200px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    object-fit: cover;
+}
+
+.video-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.control-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: none;
+    background: #667eea;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.control-btn:hover {
+    background: #5a6fd8;
+    transform: scale(1.1);
+}
+
+.recording-indicator {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #ff6b6b;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.recording-indicator i {
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.question-section {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #f1f3f4;
+}
+
+.question-progress {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.current-question, .total-questions {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 3px;
+    transition: width 0.3s ease;
+}
+
+.question-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: #ff6b6b;
+}
+
+#question-timer {
+    font-family: 'Courier New', monospace;
+    font-size: 1.1em;
+}
+
+.question-content {
+    flex: 1;
+}
+
+.question-category {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 15px;
+    color: #667eea;
+    font-weight: 600;
+}
+
+.question-text {
+    font-size: 1.1em;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 10px;
+    border-left: 4px solid #667eea;
+}
+
+.question-hints {
+    background: #fff3cd;
+    border: 1px solid #ffeaa7;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.hint-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #856404;
+}
+
+.hint-item i {
+    color: #f39c12;
+}
+
+.answer-section {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.answer-timer {
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #666;
+}
+
+#answer-timer {
+    color: #667eea;
+    font-family: 'Courier New', monospace;
+}
+
+.answer-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.question-navigation {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+    border-top: 1px solid #e9ecef;
+}
+
+.interview-status {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 25px;
+    padding: 10px 20px;
+    display: flex;
+    gap: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.9em;
+    color: #28a745;
+    font-weight: 500;
+}
+
+.status-item i {
+    font-size: 0.8em;
+}
+
+/* 模态框样式 */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.modal-header {
+    padding: 20px;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: #333;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.modal-body {
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.modal-footer {
+    padding: 20px;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .interview-main {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .interview-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .interview-info {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .interview-container {
+        padding: 10px;
+    }
+    
+    .answer-controls {
+        flex-direction: column;
+    }
+    
+    .question-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .interview-status {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px;
+    }
+}

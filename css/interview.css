@@ -1,0 +1,973 @@
+/* 面试页面专用样式 */
+
+/* 面试主容器 */
+.interview-main {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding-top: 80px;
+}
+
+/* 面试设置页面 */
+.interview-section {
+    display: none;
+}
+
+.interview-section.active {
+    display: block;
+}
+
+.setup-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.setup-card:hover {
+    transform: translateY(-5px);
+}
+
+.setup-card h2 {
+    color: #333;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.setup-card h2 i {
+    color: #667eea;
+}
+
+/* 岗位选择卡片 */
+.job-positions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.position-card {
+    background: #f8f9ff;
+    border: 2px solid #e1e5f2;
+    border-radius: 12px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.position-card:hover {
+    border-color: #667eea;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+}
+
+.position-card.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.position-icon {
+    font-size: 48px;
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.position-card.selected .position-icon {
+    color: white;
+}
+
+.position-card h3 {
+    margin: 15px 0 10px;
+    font-size: 20px;
+}
+
+.position-card p {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.position-card.selected p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.position-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.tag {
+    background: #667eea;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.position-card.selected .tag {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* 面试模式选择 */
+.interview-modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.mode-card {
+    background: white;
+    border: 2px solid #e1e5f2;
+    border-radius: 12px;
+    padding: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.mode-card:hover {
+    border-color: #667eea;
+    transform: translateY(-3px);
+}
+
+.mode-card.selected {
+    border-color: #667eea;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.mode-icon {
+    font-size: 36px;
+    color: #667eea;
+    margin-bottom: 15px;
+}
+
+.mode-card.selected .mode-icon {
+    color: white;
+}
+
+.mode-card h3 {
+    margin: 15px 0 10px;
+    font-size: 18px;
+}
+
+.mode-card p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.mode-card.selected p {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mode-card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.mode-card li {
+    padding: 5px 0;
+    color: #666;
+    position: relative;
+    padding-left: 20px;
+}
+
+.mode-card li:before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.mode-card.selected li {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.mode-card.selected li:before {
+    color: white;
+}
+
+/* 设备检测 */
+.device-check {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.device-item {
+    text-align: center;
+}
+
+.device-preview {
+    position: relative;
+    background: #f8f9ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#camera-preview {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #000;
+}
+
+.audio-preview {
+    background: #f8f9ff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 15px;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.audio-visualizer {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 20px;
+}
+
+.audio-bar {
+    width: 4px;
+    height: 20px;
+    background: #667eea;
+    border-radius: 2px;
+    animation: audioWave 1s ease-in-out infinite alternate;
+}
+
+.audio-bar:nth-child(2) { animation-delay: 0.1s; }
+.audio-bar:nth-child(3) { animation-delay: 0.2s; }
+.audio-bar:nth-child(4) { animation-delay: 0.3s; }
+.audio-bar:nth-child(5) { animation-delay: 0.4s; }
+
+@keyframes audioWave {
+    0% { height: 20px; }
+    100% { height: 40px; }
+}
+
+.device-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: #666;
+    font-size: 14px;
+}
+
+.device-status.success {
+    color: #28a745;
+}
+
+.device-status.error {
+    color: #dc3545;
+}
+
+/* 设备控制按钮 */
+.device-controls {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.device-controls .btn {
+    min-width: 100px;
+}
+
+/* 语音提示和结果 */
+.speech-prompt {
+    background: #e3f2fd;
+    border: 1px solid #2196f3;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.speech-prompt p {
+    margin: 0;
+    color: #1976d2;
+    font-weight: 500;
+}
+
+.speech-result {
+    background: #f3e5f5;
+    border: 1px solid #9c27b0;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    text-align: left;
+    max-width: 100%;
+}
+
+.speech-result h4 {
+    margin: 0 0 0.5rem 0;
+    color: #7b1fa2;
+    font-size: 0.9rem;
+}
+
+.speech-result p {
+    margin: 0;
+    color: #4a148c;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    word-wrap: break-word;
+}
+
+/* 语音识别动画 */
+.audio-visualizer.recording .audio-bar {
+    animation: recordingWave 0.5s ease-in-out infinite;
+    background: #f44336;
+}
+
+@keyframes recordingWave {
+    0%, 100% { height: 20px; opacity: 0.7; }
+    50% { height: 50px; opacity: 1; }
+}
+
+.setup-actions {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.btn-large {
+    padding: 15px 40px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+/* 面试进行页面 */
+.interview-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+}
+
+.interview-header {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.interview-info {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.position-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.mode-name {
+    background: #667eea;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 12px;
+}
+
+.interview-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.interview-progress {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.progress-bar {
+    width: 200px;
+    height: 8px;
+    background: #e1e5f2;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    transition: width 0.3s ease;
+}
+
+/* 面试主体 */
+.interview-body {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 20px;
+    min-height: 0;
+}
+
+.interviewer-section {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.interviewer-avatar {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+}
+
+.interviewer-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.speaking-indicator {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    background: #28a745;
+    border-radius: 50%;
+    border: 3px solid white;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.2); opacity: 0.7; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.question-display {
+    flex: 1;
+}
+
+.question-type {
+    background: #f8f9ff;
+    color: #667eea;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+.question-text {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #333;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f8f9ff;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.question-hints {
+    margin-top: 20px;
+}
+
+.hint-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.hint-item i {
+    color: #ffc107;
+}
+
+/* 应试者区域 */
+.candidate-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.video-container {
+    position: relative;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#user-video {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+    background: #000;
+}
+
+.video-controls {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.control-btn:hover {
+    background: rgba(0, 0, 0, 0.9);
+    transform: scale(1.1);
+}
+
+.control-btn.disabled {
+    background: rgba(220, 53, 69, 0.7);
+}
+
+.analysis-indicators {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.indicator {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #333;
+}
+
+.answer-section {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.recording-status {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9ff;
+    border-radius: 8px;
+}
+
+.recording-dot {
+    width: 12px;
+    height: 12px;
+    background: #dc3545;
+    border-radius: 50%;
+    animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0.3; }
+}
+
+.recording-time {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    color: #dc3545;
+}
+
+.answer-controls {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* 面试工具栏 */
+.interview-toolbar {
+    background: white;
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.toolbar-left {
+    display: flex;
+    gap: 15px;
+}
+
+.tool-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    transition: color 0.3s ease;
+}
+
+.tool-btn:hover {
+    color: #667eea;
+}
+
+.tool-btn i {
+    font-size: 18px;
+}
+
+/* 面试结果页面 */
+.result-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.result-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 36px;
+}
+
+.result-subtitle {
+    color: #666;
+    font-size: 16px;
+}
+
+/* 总体评分 */
+.score-overview {
+    background: white;
+    border-radius: 15px;
+    padding: 40px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.overall-score {
+    text-align: center;
+}
+
+.score-circle {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    margin: 0 auto;
+}
+
+.score-value {
+    font-size: 48px;
+    font-weight: 700;
+}
+
+.score-label {
+    font-size: 16px;
+    margin-top: 5px;
+}
+
+.score-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.score-item {
+    display: grid;
+    grid-template-columns: 120px 1fr 60px;
+    gap: 15px;
+    align-items: center;
+}
+
+.score-name {
+    font-weight: 500;
+    color: #333;
+}
+
+.score-bar {
+    height: 12px;
+    background: #e1e5f2;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.score-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 6px;
+    transition: width 1s ease;
+}
+
+.score-number {
+    font-weight: 600;
+    color: #667eea;
+    text-align: right;
+}
+
+/* 雷达图 */
+.radar-chart-container {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.radar-chart {
+    margin: 20px auto;
+    max-width: 400px;
+}
+
+/* 详细分析 */
+.detailed-analysis {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.analysis-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e1e5f2;
+}
+
+.tab-btn {
+    background: none;
+    border: none;
+    padding: 15px 25px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tab-btn.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.analysis-item {
+    margin-bottom: 25px;
+    padding: 20px;
+    background: #f8f9ff;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+.analysis-item h4 {
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.analysis-score {
+    display: inline-block;
+    background: #667eea;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.analysis-item p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 建议和操作 */
+.suggestions {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 20px;
+    padding: 20px;
+    background: #f8f9ff;
+    border-radius: 12px;
+}
+
+.suggestion-icon {
+    width: 40px;
+    height: 40px;
+    background: #667eea;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    flex-shrink: 0;
+}
+
+.suggestion-content h4 {
+    margin: 0 0 8px;
+    color: #333;
+}
+
+.suggestion-content p {
+    color: #666;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.result-actions {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.result-actions .btn {
+    margin: 0 10px;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .interview-body {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .candidate-section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .interview-main {
+        padding-top: 70px;
+    }
+    
+    .job-positions {
+        grid-template-columns: 1fr;
+    }
+    
+    .interview-modes {
+        grid-template-columns: 1fr;
+    }
+    
+    .device-check {
+        grid-template-columns: 1fr;
+    }
+    
+    .interview-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .interview-progress {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .score-overview {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+    
+    .candidate-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .analysis-tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        border-bottom: none;
+        border-left: 3px solid transparent;
+    }
+    
+    .tab-btn.active {
+        border-left-color: #667eea;
+        border-bottom-color: transparent;
+    }
+}

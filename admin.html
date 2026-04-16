@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理员后台 - 智能面试评测系统</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="admin-body">
+    <!-- 顶部导航栏 -->
+    <header class="admin-header">
+        <div class="header-left">
+            <button class="sidebar-toggle" id="sidebar-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>管理员后台</span>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="header-search">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="搜索用户、面试记录...">
+            </div>
+            <div class="header-notifications">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+            </div>
+            <div class="header-user">
+                <div class="user-avatar">
+                    <img src="images/admin-avatar.svg" alt="管理员">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">管理员</span>
+                    <span class="user-role">系统管理员</span>
+                </div>
+                <div class="user-menu">
+                    <button class="menu-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#"><i class="fas fa-user"></i> 个人设置</a>
+                        <a href="#"><i class="fas fa-cog"></i> 系统设置</a>
+                        <a href="#" data-action="logout"><i class="fas fa-sign-out-alt"></i> 退出登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="admin-container">
+        <!-- 侧边栏 -->
+        <aside class="admin-sidebar" id="admin-sidebar">
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="#dashboard" class="nav-item active" data-section="dashboard">
+                        <i class="fas fa-chart-pie"></i>
+                        <span>数据概览</span>
+                    </a></li>
+                    <li><a href="#users" class="nav-item" data-section="users">
+                        <i class="fas fa-users"></i>
+                        <span>用户管理</span>
+                    </a></li>
+                    <li><a href="#interviews" class="nav-item" data-section="interviews">
+                        <i class="fas fa-video"></i>
+                        <span>面试管理</span>
+                    </a></li>
+                    <li><a href="#questions" class="nav-item" data-section="questions">
+                        <i class="fas fa-question-circle"></i>
+                        <span>题库管理</span>
+                    </a></li>
+                    <li><a href="#analytics" class="nav-item" data-section="analytics">
+                        <i class="fas fa-chart-line"></i>
+                        <span>数据分析</span>
+                    </a></li>
+                    <li><a href="#content" class="nav-item" data-section="content">
+                        <i class="fas fa-book"></i>
+                        <span>内容管理</span>
+                    </a></li>
+                    <li><a href="#system" class="nav-item" data-section="system">
+                        <i class="fas fa-cog"></i>
+                        <span>系统设置</span>
+                    </a></li>
+                    <li><a href="#logs" class="nav-item" data-section="logs">
+                        <i class="fas fa-file-alt"></i>
+                        <span>系统日志</span>
+                    </a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="admin-main">
+            <!-- 数据概览 -->
+            <section id="dashboard" class="admin-section active">
+                <div class="section-header">
+                    <h2>数据概览</h2>
+                    <div class="header-actions">
+                        <select class="time-filter">
+                            <option value="today">今天</option>
+                            <option value="week">本周</option>
+                            <option value="month" selected>本月</option>
+                            <option value="quarter">本季度</option>
+                        </select>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            导出报告
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 关键指标卡片 -->
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">12,345</div>
+                            <div class="metric-label">总用户数</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +12.5%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-play-circle"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">8,967</div>
+                            <div class="metric-label">本月面试次数</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +8.3%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">1,234</div>
+                            <div class="metric-label">活跃用户</div>
+                            <div class="metric-change negative">
+                                <i class="fas fa-arrow-down"></i>
+                                -2.1%
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="metric-content">
+                            <div class="metric-value">4.8</div>
+                            <div class="metric-label">平均评分</div>
+                            <div class="metric-change positive">
+                                <i class="fas fa-arrow-up"></i>
+                                +0.2
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 图表区域 -->
+                <div class="charts-grid">
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>用户增长趋势</h3>
+                            <div class="chart-controls">
+                                <button class="chart-btn active" data-period="week">周</button>
+                                <button class="chart-btn" data-period="month">月</button>
+                                <button class="chart-btn" data-period="year">年</button>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="user-growth-chart" width="600" height="300"></canvas>
+                        </div>
+                    </div>
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>面试岗位分布</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="position-distribution-chart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 实时数据 -->
+                <div class="realtime-section">
+                    <div class="realtime-card">
+                        <h3>实时面试状态</h3>
+                        <div class="realtime-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">进行中</span>
+                                <span class="stat-value">23</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">等待中</span>
+                                <span class="stat-value">8</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">今日完成</span>
+                                <span class="stat-value">156</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="recent-activity">
+                        <h3>最近活动</h3>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-user-plus"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <span>新用户注册：张三</span>
+                                    <span class="activity-time">2分钟前</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-play"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <span>面试完成：李四 - AI工程师</span>
+                                    <span class="activity-time">5分钟前</span>
+                                </div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                </div>
+                                <div class="activity-content">
+                                    <span>系统警告：服务器负载过高</span>
+                                    <span class="activity-time">10分钟前</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 用户管理 -->
+            <section id="users" class="admin-section">
+                <div class="section-header">
+                    <h2>用户管理</h2>
+                    <div class="header-actions">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input type="text" placeholder="搜索用户...">
+                        </div>
+                        <select class="filter-select">
+                            <option value="all">全部用户</option>
+                            <option value="active">活跃用户</option>
+                            <option value="inactive">非活跃用户</option>
+                            <option value="banned">已封禁</option>
+                        </select>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-user-plus"></i>
+                            添加用户
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select-all-users"></th>
+                                <th>用户信息</th>
+                                <th>学校专业</th>
+                                <th>注册时间</th>
+                                <th>面试次数</th>
+                                <th>平均得分</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="user-info">
+                                        <img src="images/user-1.svg" alt="用户头像" class="user-avatar-small">
+                                        <div>
+                                            <div class="user-name">张同学</div>
+                                            <div class="user-email">zhang@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>清华大学</div>
+                                    <div class="text-muted">计算机科学与技术</div>
+                                </td>
+                                <td>2024-01-15</td>
+                                <td>23</td>
+                                <td>85.6</td>
+                                <td><span class="status-badge active">活跃</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="查看详情">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" title="编辑">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon danger" title="删除">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox"></td>
+                                <td>
+                                    <div class="user-info">
+                                        <img src="images/user-2.svg" alt="用户头像" class="user-avatar-small">
+                                        <div>
+                                            <div class="user-name">李同学</div>
+                                            <div class="user-email">li@example.com</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div>北京大学</div>
+                                    <div class="text-muted">数据科学与大数据技术</div>
+                                </td>
+                                <td>2024-01-12</td>
+                                <td>18</td>
+                                <td>78.9</td>
+                                <td><span class="status-badge inactive">非活跃</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="查看详情">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon" title="编辑">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="btn-icon danger" title="删除">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="table-pagination">
+                    <div class="pagination-info">
+                        显示 1-20 条，共 1,234 条记录
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="btn btn-outline">上一页</button>
+                        <span class="page-numbers">
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <span>...</span>
+                            <button class="page-btn">10</button>
+                        </span>
+                        <button class="btn btn-outline">下一页</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 面试管理 -->
+            <section id="interviews" class="admin-section">
+                <div class="section-header">
+                    <h2>面试管理</h2>
+                    <div class="header-actions">
+                        <select class="filter-select">
+                            <option value="all">全部面试</option>
+                            <option value="ai">AI工程师</option>
+                            <option value="bigdata">大数据工程师</option>
+                            <option value="iot">物联网工程师</option>
+                            <option value="pm">产品经理</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="all">全部状态</option>
+                            <option value="ongoing">进行中</option>
+                            <option value="completed">已完成</option>
+                            <option value="cancelled">已取消</option>
+                        </select>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            导出数据
+                        </button>
+                    </div>
+                </div>
+
+                <div class="interview-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">156</div>
+                        <div class="stat-label">今日面试</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">23</div>
+                        <div class="stat-label">进行中</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">133</div>
+                        <div class="stat-label">已完成</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">82.5</div>
+                        <div class="stat-label">平均得分</div>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table class="admin-table">
+                        <thead>
+                            <tr>
+                                <th>面试ID</th>
+                                <th>用户</th>
+                                <th>岗位</th>
+                                <th>模式</th>
+                                <th>开始时间</th>
+                                <th>时长</th>
+                                <th>得分</th>
+                                <th>状态</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#INT-2024-001</td>
+                                <td>
+                                    <div class="user-info">
+                                        <img src="images/user-1.svg" alt="用户头像" class="user-avatar-small">
+                                        <span>张同学</span>
+                                    </div>
+                                </td>
+                                <td>AI工程师</td>
+                                <td>限时模拟</td>
+                                <td>2024-01-15 14:30</td>
+                                <td>42分钟</td>
+                                <td>88.5</td>
+                                <td><span class="status-badge completed">已完成</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="查看录像">
+                                            <i class="fas fa-play"></i>
+                                        </button>
+                                        <button class="btn-icon" title="查看报告">
+                                            <i class="fas fa-file-alt"></i>
+                                        </button>
+                                        <button class="btn-icon" title="下载">
+                                            <i class="fas fa-download"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#INT-2024-002</td>
+                                <td>
+                                    <div class="user-info">
+                                        <img src="images/user-2.svg" alt="用户头像" class="user-avatar-small">
+                                        <span>李同学</span>
+                                    </div>
+                                </td>
+                                <td>大数据工程师</td>
+                                <td>自由练习</td>
+                                <td>2024-01-15 15:20</td>
+                                <td>25分钟</td>
+                                <td>-</td>
+                                <td><span class="status-badge ongoing">进行中</span></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn-icon" title="实时监控">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="btn-icon danger" title="终止面试">
+                                            <i class="fas fa-stop"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 题库管理 -->
+            <section id="questions" class="admin-section">
+                <div class="section-header">
+                    <h2>题库管理</h2>
+                    <div class="header-actions">
+                        <select class="filter-select">
+                            <option value="all">全部岗位</option>
+                            <option value="ai">AI工程师</option>
+                            <option value="bigdata">大数据工程师</option>
+                            <option value="iot">物联网工程师</option>
+                            <option value="pm">产品经理</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="all">全部类型</option>
+                            <option value="technical">技术问答</option>
+                            <option value="project">项目经历</option>
+                            <option value="scenario">场景模拟</option>
+                        </select>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            添加题目
+                        </button>
+                    </div>
+                </div>
+
+                <div class="question-stats">
+                    <div class="stat-card">
+                        <div class="stat-number">1,234</div>
+                        <div class="stat-label">总题目数</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">456</div>
+                        <div class="stat-label">技术问答</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">389</div>
+                        <div class="stat-label">项目经历</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number">389</div>
+                        <div class="stat-label">场景模拟</div>
+                    </div>
+                </div>
+
+                <div class="questions-grid">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-meta">
+                                <span class="question-type technical">技术问答</span>
+                                <span class="question-position">AI工程师</span>
+                            </div>
+                            <div class="question-actions">
+                                <button class="btn-icon" title="编辑">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon danger" title="删除">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="question-content">
+                            <h4>请解释深度学习中的反向传播算法原理</h4>
+                            <p>考察候选人对深度学习基础理论的理解程度...</p>
+                        </div>
+                        <div class="question-footer">
+                            <div class="question-stats">
+                                <span><i class="fas fa-eye"></i> 使用次数: 156</span>
+                                <span><i class="fas fa-star"></i> 平均得分: 78.5</span>
+                                <span><i class="fas fa-clock"></i> 平均时长: 3分钟</span>
+                            </div>
+                            <div class="question-difficulty">
+                                <span class="difficulty-badge medium">中等</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-meta">
+                                <span class="question-type project">项目经历</span>
+                                <span class="question-position">大数据工程师</span>
+                            </div>
+                            <div class="question-actions">
+                                <button class="btn-icon" title="编辑">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="btn-icon danger" title="删除">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="question-content">
+                            <h4>请介绍一个您参与的大数据处理项目</h4>
+                            <p>请从项目背景、技术选型、实现方案、遇到的挑战等方面详细介绍...</p>
+                        </div>
+                        <div class="question-footer">
+                            <div class="question-stats">
+                                <span><i class="fas fa-eye"></i> 使用次数: 89</span>
+                                <span><i class="fas fa-star"></i> 平均得分: 82.1</span>
+                                <span><i class="fas fa-clock"></i> 平均时长: 5分钟</span>
+                            </div>
+                            <div class="question-difficulty">
+                                <span class="difficulty-badge hard">困难</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-pagination">
+                    <div class="pagination-info">
+                        显示 1-12 条，共 1,234 条记录
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="btn btn-outline">上一页</button>
+                        <span class="page-numbers">
+                            <button class="page-btn active">1</button>
+                            <button class="page-btn">2</button>
+                            <button class="page-btn">3</button>
+                            <span>...</span>
+                            <button class="page-btn">103</button>
+                        </span>
+                        <button class="btn btn-outline">下一页</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 数据分析 -->
+            <section id="analytics" class="admin-section">
+                <div class="section-header">
+                    <h2>数据分析</h2>
+                    <div class="header-actions">
+                        <select class="time-filter">
+                            <option value="week">本周</option>
+                            <option value="month" selected>本月</option>
+                            <option value="quarter">本季度</option>
+                            <option value="year">本年</option>
+                        </select>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-chart-bar"></i>
+                            生成报告
+                        </button>
+                    </div>
+                </div>
+
+                <div class="analytics-grid">
+                    <div class="chart-card large">
+                        <div class="chart-header">
+                            <h3>面试完成率趋势</h3>
+                            <div class="chart-legend">
+                                <span class="legend-item">
+                                    <span class="legend-color" style="background: #4CAF50;"></span>
+                                    完成
+                                </span>
+                                <span class="legend-item">
+                                    <span class="legend-color" style="background: #FF9800;"></span>
+                                    未完成
+                                </span>
+                            </div>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="completion-trend-chart" width="800" height="400"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>岗位热度分析</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="position-popularity-chart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card">
+                        <div class="chart-header">
+                            <h3>用户能力分布</h3>
+                        </div>
+                        <div class="chart-container">
+                            <canvas id="ability-distribution-chart" width="400" height="300"></canvas>
+                        </div>
+                    </div>
+
+                    <div class="chart-card large">
+                        <div class="chart-header">
+                            <h3>学校分布统计</h3>
+                        </div>
+                        <div class="school-stats">
+                            <div class="school-item">
+                                <div class="school-info">
+                                    <span class="school-name">清华大学</span>
+                                    <span class="school-count">1,234 用户</span>
+                                </div>
+                                <div class="school-bar">
+                                    <div class="school-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="school-item">
+                                <div class="school-info">
+                                    <span class="school-name">北京大学</span>
+                                    <span class="school-count">1,089 用户</span>
+                                </div>
+                                <div class="school-bar">
+                                    <div class="school-fill" style="width: 75%"></div>
+                                </div>
+                            </div>
+                            <div class="school-item">
+                                <div class="school-info">
+                                    <span class="school-name">上海交通大学</span>
+                                    <span class="school-count">856 用户</span>
+                                </div>
+                                <div class="school-bar">
+                                    <div class="school-fill" style="width: 59%"></div>
+                                </div>
+                            </div>
+                            <div class="school-item">
+                                <div class="school-info">
+                                    <span class="school-name">浙江大学</span>
+                                    <span class="school-count">743 用户</span>
+                                </div>
+                                <div class="school-bar">
+                                    <div class="school-fill" style="width: 51%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 系统设置 -->
+            <section id="system" class="admin-section">
+                <div class="section-header">
+                    <h2>系统设置</h2>
+                </div>
+
+                <div class="settings-grid">
+                    <div class="settings-card">
+                        <h3>基础设置</h3>
+                        <div class="setting-item">
+                            <label>系统名称</label>
+                            <input type="text" value="智能面试评测系统">
+                        </div>
+                        <div class="setting-item">
+                            <label>系统描述</label>
+                            <textarea>基于AI技术的多模态面试训练平台</textarea>
+                        </div>
+                        <div class="setting-item">
+                            <label>联系邮箱</label>
+                            <input type="email" value="support@interview-ai.com">
+                        </div>
+                        <button class="btn btn-primary">保存设置</button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>面试设置</h3>
+                        <div class="setting-item">
+                            <label>默认面试时长（分钟）</label>
+                            <input type="number" value="45">
+                        </div>
+                        <div class="setting-item">
+                            <label>最大并发面试数</label>
+                            <input type="number" value="100">
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                启用语音分析
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                启用视频分析
+                            </label>
+                        </div>
+                        <button class="btn btn-primary">保存设置</button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>AI模型设置</h3>
+                        <div class="setting-item">
+                            <label>语音识别模型</label>
+                            <select>
+                                <option>Whisper-Large</option>
+                                <option>Azure Speech</option>
+                                <option>Google Speech</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>情感分析模型</label>
+                            <select>
+                                <option>BERT-Emotion</option>
+                                <option>RoBERTa-Emotion</option>
+                                <option>Custom Model</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>面部表情识别</label>
+                            <select>
+                                <option>OpenCV + DeepFace</option>
+                                <option>Azure Face API</option>
+                                <option>Custom CNN</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary">保存设置</button>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>安全设置</h3>
+                        <div class="setting-item">
+                            <label>密码最小长度</label>
+                            <input type="number" value="8">
+                        </div>
+                        <div class="setting-item">
+                            <label>登录失败锁定次数</label>
+                            <input type="number" value="5">
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span class="checkmark"></span>
+                                启用双因素认证
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label class="checkbox-label">
+                                <input type="checkbox">
+                                <span class="checkmark"></span>
+                                启用IP白名单
+                            </label>
+                        </div>
+                        <button class="btn btn-primary">保存设置</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 系统日志 -->
+            <section id="logs" class="admin-section">
+                <div class="section-header">
+                    <h2>系统日志</h2>
+                    <div class="header-actions">
+                        <select class="filter-select">
+                            <option value="all">全部级别</option>
+                            <option value="info">信息</option>
+                            <option value="warning">警告</option>
+                            <option value="error">错误</option>
+                        </select>
+                        <input type="date" class="date-filter">
+                        <button class="btn btn-primary">
+                            <i class="fas fa-download"></i>
+                            导出日志
+                        </button>
+                    </div>
+                </div>
+
+                <div class="logs-container">
+                    <div class="log-item info">
+                        <div class="log-time">2024-01-15 15:30:25</div>
+                        <div class="log-level">INFO</div>
+                        <div class="log-message">用户登录成功: zhang@example.com</div>
+                        <div class="log-source">auth.service</div>
+                    </div>
+                    <div class="log-item warning">
+                        <div class="log-time">2024-01-15 15:28:12</div>
+                        <div class="log-level">WARNING</div>
+                        <div class="log-message">服务器CPU使用率过高: 85%</div>
+                        <div class="log-source">monitor.service</div>
+                    </div>
+                    <div class="log-item error">
+                        <div class="log-time">2024-01-15 15:25:08</div>
+                        <div class="log-level">ERROR</div>
+                        <div class="log-message">面试录制失败: 存储空间不足</div>
+                        <div class="log-source">interview.service</div>
+                    </div>
+                    <div class="log-item info">
+                        <div class="log-time">2024-01-15 15:22:45</div>
+                        <div class="log-level">INFO</div>
+                        <div class="log-message">面试评测完成: INT-2024-001</div>
+                        <div class="log-source">ai.service</div>
+                    </div>
+                </div>
+
+                <div class="table-pagination">
+                    <div class="pagination-info">
+                        显示最近 50 条日志
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="btn btn-outline">加载更多</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/global-logout.js"></script>
+    <script src="js/radar-chart.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

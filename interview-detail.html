@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>面试详情报告</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .detail-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            overflow: visible;
+        }
+        .detail-header {
+            padding: 30px;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+        }
+        .detail-header h1 {
+            margin: 0;
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+        .detail-content {
+            padding: 30px;
+        }
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        @media print {
+            .download-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" onclick="downloadFullReport()">
+        <i class="fas fa-download"></i> 下载完整报告
+    </button>
+    
+    <div class="detail-container" id="reportContent">
+        <div class="detail-header">
+            <h1>面试详情报告</h1>
+        </div>
+        <div class="detail-content">
+            <div class="interview-detail-info">
+                <div class="detail-section">
+                    <h3>基本信息</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>练习模式：</label>
+                            <span id="detailMode">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>题目标题：</label>
+                            <span id="detailQuestionTitle">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>面试时间：</label>
+                            <span id="detailTime">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>总体得分：</label>
+                            <span id="detailScore" class="score-highlight">-</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>AI评测结果</h3>
+                    <div class="score-breakdown-detail" id="scoreBreakdownDetail">
+                        <div class="score-item-detail">
+                            <div class="score-label">
+                                <i class="fas fa-comments"></i>
+                                <span>表达能力</span>
+                            </div>
+                            <div class="score-bar-detail">
+                                <div class="score-fill-detail" id="expression-fill"></div>
+                            </div>
+                            <span class="score-value" id="expression-score">0</span>
+                        </div>
+                        <div class="score-item-detail">
+                            <div class="score-label">
+                                <i class="fas fa-brain"></i>
+                                <span>逻辑思维</span>
+                            </div>
+                            <div class="score-bar-detail">
+                                <div class="score-fill-detail" id="logic-fill"></div>
+                            </div>
+                            <span class="score-value" id="logic-score">0</span>
+                        </div>
+                        <div class="score-item-detail">
+                            <div class="score-label">
+                                <i class="fas fa-lightbulb"></i>
+                                <span>专业知识</span>
+                            </div>
+                            <div class="score-bar-detail">
+                                <div class="score-fill-detail" id="knowledge-fill"></div>
+                            </div>
+                            <span class="score-value" id="knowledge-score">0</span>
+                        </div>
+                        <div class="score-item-detail">
+                            <div class="score-label">
+                                <i class="fas fa-cogs"></i>
+                                <span>应变能力</span>
+                            </div>
+                            <div class="score-bar-detail">
+                                <div class="score-fill-detail" id="adaptability-fill"></div>
+                            </div>
+                            <span class="score-value" id="adaptability-score">0</span>
+                        </div>
+                        <div class="score-item-detail">
+                            <div class="score-label">
+                                <i class="fas fa-user-tie"></i>
+                                <span>职业素养</span>
+                            </div>
+                            <div class="score-bar-detail">
+                                <div class="score-fill-detail" id="professionalism-fill"></div>
+                            </div>
+                            <span class="score-value" id="professionalism-score">0</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>详细评价</h3>
+                    <div class="evaluation-content" id="evaluationContent">
+                        <p>暂无评价内容</p>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>改进建议</h3>
+                    <div class="suggestions-content" id="suggestionsContent">
+                        <p>暂无改进建议</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        // 从URL参数获取面试数据
+        function getInterviewDataFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const dataParam = urlParams.get('data');
+            if (dataParam) {
+                try {
+                    return JSON.parse(decodeURIComponent(dataParam));
+                } catch (e) {
+                    console.error('解析面试数据失败:', e);
+                }
+            }
+            return null;
+        }
+        
+        // 填充页面数据
+        function populatePageData(data) {
+            if (!data) return;
+            
+            document.getElementById('detailMode').textContent = data.mode || '-';
+            document.getElementById('detailQuestionTitle').textContent = data.questionTitle || '-';
+            document.getElementById('detailTime').textContent = data.time || '-';
+            document.getElementById('detailScore').textContent = data.score || '-';
+            
+            // 填充评分数据
+            if (data.scores) {
+                const scoreMapping = {
+                    'expression': '表达能力',
+                    'logic': '逻辑思维', 
+                    'knowledge': '专业知识',
+                    'adaptability': '应变能力',
+                    'professionalism': '职业素养'
+                };
+                
+                Object.keys(scoreMapping).forEach(key => {
+                    const score = data.scores[key] || 0;
+                    const scoreElement = document.getElementById(key + '-score');
+                    const fillElement = document.getElementById(key + '-fill');
+                    
+                    if (scoreElement) scoreElement.textContent = score;
+                    if (fillElement) {
+                        fillElement.style.width = score + '%';
+                        fillElement.style.background = getScoreColor(score);
+                    }
+                });
+            }
+            
+            // 填充评价内容
+            if (data.evaluation) {
+                document.getElementById('evaluationContent').innerHTML = data.evaluation;
+            }
+            
+            // 填充建议内容
+            if (data.suggestions) {
+                document.getElementById('suggestionsContent').innerHTML = data.suggestions;
+            }
+        }
+        
+        function getScoreColor(score) {
+            if (score >= 90) return 'linear-gradient(135deg, #4CAF50, #45a049)';
+            if (score >= 80) return 'linear-gradient(135deg, #2196F3, #1976D2)';
+            if (score >= 70) return 'linear-gradient(135deg, #FF9800, #F57C00)';
+            if (score >= 60) return 'linear-gradient(135deg, #FF5722, #D84315)';
+            return 'linear-gradient(135deg, #f44336, #c62828)';
+        }
+        
+        // 下载完整报告
+        function downloadFullReport() {
+            const element = document.getElementById('reportContent');
+            const downloadBtn = document.querySelector('.download-btn');
+            
+            // 隐藏下载按钮
+            downloadBtn.style.display = 'none';
+            
+            html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                width: element.scrollWidth,
+                height: element.scrollHeight,
+                scrollX: 0,
+                scrollY: 0
+            }).then(canvas => {
+                // 恢复下载按钮
+                downloadBtn.style.display = 'flex';
+                
+                const imgData = canvas.toDataURL('image/png');
+                const { jsPDF } = window.jspdf;
+                const pdf = new jsPDF('p', 'mm', 'a4');
+                
+                const imgWidth = 210; // A4宽度
+                const pageHeight = 295; // A4高度
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                // 添加第一页
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                // 如果内容超过一页，添加更多页面
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                // 下载PDF
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                pdf.save(`面试详情报告_${timestamp}.pdf`);
+            }).catch(error => {
+                console.error('生成PDF时出错:', error);
+                alert('生成PDF失败，请重试');
+                downloadBtn.style.display = 'flex';
+            });
+        }
+        
+        // 页面加载时初始化数据
+        document.addEventListener('DOMContentLoaded', function() {
+            const data = getInterviewDataFromURL();
+            populatePageData(data);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟面试 - 智能面试评测系统</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/interview.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>智能面试评测</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">首页</a></li>
+                <li><a href="dashboard.html" class="nav-link">个人中心</a></li>
+                <li><a href="#" class="nav-link" id="logout-btn" data-action="logout">退出</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="interview-main">
+        <!-- 面试设置页面 -->
+        <div id="interview-setup" class="interview-section active">
+            <div class="container">
+                <h1>开始模拟面试</h1>
+                
+                <!-- 岗位选择 -->
+                <div class="setup-card">
+                    <h2><i class="fas fa-briefcase"></i> 选择面试岗位</h2>
+                    <div class="job-positions">
+                        <div class="position-card" data-position="ai">
+                            <div class="position-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <h3>人工智能工程师</h3>
+                            <p>机器学习、深度学习、算法优化</p>
+                            <div class="position-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">TensorFlow</span>
+                                <span class="tag">算法</span>
+                            </div>
+                        </div>
+                        <div class="position-card" data-position="bigdata">
+                            <div class="position-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>大数据工程师</h3>
+                            <p>数据处理、分析挖掘、架构设计</p>
+                            <div class="position-tags">
+                                <span class="tag">Hadoop</span>
+                                <span class="tag">Spark</span>
+                                <span class="tag">SQL</span>
+                            </div>
+                        </div>
+                        <div class="position-card" data-position="iot">
+                            <div class="position-icon">
+                                <i class="fas fa-wifi"></i>
+                            </div>
+                            <h3>物联网工程师</h3>
+                            <p>嵌入式开发、传感器、通信协议</p>
+                            <div class="position-tags">
+                                <span class="tag">C/C++</span>
+                                <span class="tag">嵌入式</span>
+                                <span class="tag">MQTT</span>
+                            </div>
+                        </div>
+                        <div class="position-card" data-position="pm">
+                            <div class="position-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <h3>产品经理</h3>
+                            <p>产品规划、需求分析、用户体验</p>
+                            <div class="position-tags">
+                                <span class="tag">产品设计</span>
+                                <span class="tag">用户研究</span>
+                                <span class="tag">数据分析</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 面试模式选择 -->
+                <div class="setup-card">
+                    <h2><i class="fas fa-cog"></i> 选择面试模式</h2>
+                    <div class="interview-modes">
+                        <div class="mode-card" data-mode="free">
+                            <div class="mode-icon">
+                                <i class="fas fa-play"></i>
+                            </div>
+                            <h3>自由练习</h3>
+                            <p>无时间限制，随意选择题目练习</p>
+                            <ul>
+                                <li>不限时间</li>
+                                <li>可重复练习</li>
+                                <li>即时反馈</li>
+                            </ul>
+                        </div>
+                        <div class="mode-card" data-mode="timed">
+                            <div class="mode-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>限时模拟</h3>
+                            <p>真实面试时间限制，完整面试流程</p>
+                            <ul>
+                                <li>时长限制</li>
+                                <li>完整面试流程</li>
+                                <li>综合评测报告</li>
+                            </ul>
+                        </div>
+                        <div class="mode-card" data-mode="focused">
+                            <div class="mode-icon">
+                                <i class="fas fa-target"></i>
+                            </div>
+                            <h3>专项训练</h3>
+                            <p>针对特定能力维度专项强化</p>
+                            <ul>
+                                <li>技术问答专项</li>
+                                <li>项目经历专项</li>
+                                <li>场景模拟专项</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 设备检测 -->
+                <div class="setup-card">
+                    <h2><i class="fas fa-video"></i> 设备检测</h2>
+                    <div class="device-check">
+                        <div class="device-item">
+                            <div class="device-preview">
+                                <video id="camera-preview" autoplay muted></video>
+                                <div class="device-status" id="camera-status">
+                                    <i class="fas fa-video"></i>
+                                    <span>摄像头未检测</span>
+                                </div>
+                            </div>
+                            <div class="device-controls">
+                                <button class="btn btn-primary" id="start-camera">开始检测</button>
+                                <button class="btn btn-secondary" id="stop-camera" style="display: none;">停止检测</button>
+                            </div>
+                        </div>
+                        <div class="device-item">
+                            <div class="audio-preview">
+                                <div class="audio-visualizer">
+                                    <div class="audio-bar"></div>
+                                    <div class="audio-bar"></div>
+                                    <div class="audio-bar"></div>
+                                    <div class="audio-bar"></div>
+                                    <div class="audio-bar"></div>
+                                </div>
+                                <div class="device-status" id="mic-status">
+                                    <i class="fas fa-microphone"></i>
+                                    <span>麦克风未检测</span>
+                                </div>
+                                <div class="speech-prompt" id="speech-prompt" style="display: none;">
+                                    <p>请说几句话进行测试...</p>
+                                </div>
+                                <div class="speech-result" id="speech-result" style="display: none;">
+                                    <h4>识别结果：</h4>
+                                    <p id="speech-text">等待语音输入...</p>
+                                </div>
+                            </div>
+                            <div class="device-controls">
+                                <button class="btn btn-primary" id="start-microphone">开始检测</button>
+                                <button class="btn btn-secondary" id="stop-microphone" style="display: none;">停止检测</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setup-actions">
+                    <button class="btn btn-primary btn-large" id="start-interview" disabled>
+                        <i class="fas fa-play"></i>
+                        开始面试
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 面试进行页面 -->
+        <div id="interview-session" class="interview-section">
+            <div class="interview-container">
+                <!-- 面试头部信息 -->
+                <div class="interview-header">
+                    <div class="interview-info">
+                        <span class="position-name">人工智能工程师</span>
+                        <span class="mode-name">限时模拟</span>
+                    </div>
+                    <div class="interview-timer">
+                        <i class="fas fa-clock"></i>
+                        <span id="timer">45:00</span>
+                    </div>
+                    <div class="interview-progress">
+                        <span>题目 <span id="current-question">1</span> / <span id="total-questions">10</span></span>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progress-fill"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 面试主体 -->
+                <div class="interview-body">
+                    <!-- 面试官区域 -->
+                    <div class="interviewer-section">
+                        <div class="interviewer-avatar">
+                            <img src="images/interviewer-avatar.svg" alt="面试官">
+                            <div class="speaking-indicator" id="interviewer-speaking"></div>
+                        </div>
+                        <div class="question-display">
+                            <div class="question-type" id="question-type">技术问答</div>
+                            <div class="question-text" id="question-text">
+                                请介绍一下您对机器学习中监督学习和无监督学习的理解，并举例说明它们的应用场景。
+                            </div>
+                            <div class="question-hints" id="question-hints">
+                                <div class="hint-item">
+                                    <i class="fas fa-lightbulb"></i>
+                                    <span>可以从定义、特点、算法、应用等角度回答</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 应试者区域 -->
+                    <div class="candidate-section">
+                        <div class="video-container">
+                            <video id="user-video" autoplay muted></video>
+                            <div class="video-controls">
+                                <button class="control-btn" id="toggle-video">
+                                    <i class="fas fa-video"></i>
+                                </button>
+                                <button class="control-btn" id="toggle-audio">
+                                    <i class="fas fa-microphone"></i>
+                                </button>
+                            </div>
+                            <div class="analysis-indicators">
+                                <div class="indicator" id="emotion-indicator">
+                                    <i class="fas fa-smile"></i>
+                                    <span>表情分析</span>
+                                </div>
+                                <div class="indicator" id="voice-indicator">
+                                    <i class="fas fa-volume-up"></i>
+                                    <span>语音分析</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="answer-section">
+                            <div class="recording-status" id="recording-status">
+                                <div class="recording-dot"></div>
+                                <span>正在录制回答...</span>
+                                <div class="recording-time" id="recording-time">00:00</div>
+                            </div>
+                            <div class="answer-controls">
+                                <button class="btn btn-secondary" id="pause-answer">
+                                    <i class="fas fa-pause"></i>
+                                    暂停
+                                </button>
+                                <button class="btn btn-primary" id="finish-answer">
+                                    <i class="fas fa-check"></i>
+                                    完成回答
+                                </button>
+                                <button class="btn btn-outline" id="skip-question">
+                                    <i class="fas fa-forward"></i>
+                                    跳过
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 面试底部工具栏 -->
+                <div class="interview-toolbar">
+                    <div class="toolbar-left">
+                        <button class="tool-btn" id="show-notes">
+                            <i class="fas fa-sticky-note"></i>
+                            <span>笔记</span>
+                        </button>
+                        <button class="tool-btn" id="show-help">
+                            <i class="fas fa-question-circle"></i>
+                            <span>帮助</span>
+                        </button>
+                    </div>
+                    <div class="toolbar-right">
+                        <button class="btn btn-danger" id="end-interview">
+                            <i class="fas fa-stop"></i>
+                            结束面试
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 面试结果页面 -->
+        <div id="interview-result" class="interview-section">
+            <div class="container">
+                <div class="result-header">
+                    <div class="result-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h1>面试评测报告</h1>
+                    <p class="result-subtitle">基于多模态AI分析生成的综合评测结果</p>
+                </div>
+
+                <!-- 总体评分 -->
+                <div class="score-overview">
+                    <div class="overall-score">
+                        <div class="score-circle">
+                            <div class="score-value" id="overall-score">85</div>
+                            <div class="score-label">综合得分</div>
+                        </div>
+                    </div>
+                    <div class="score-breakdown">
+                        <div class="score-item">
+                            <div class="score-name">表达能力</div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 88%"></div>
+                            </div>
+                            <div class="score-number">88</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-name">逻辑思维</div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 82%"></div>
+                            </div>
+                            <div class="score-number">82</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-name">专业知识</div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 90%"></div>
+                            </div>
+                            <div class="score-number">90</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-name">应变能力</div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 78%"></div>
+                            </div>
+                            <div class="score-number">78</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-name">职业素养</div>
+                            <div class="score-bar">
+                                <div class="score-fill" style="width: 87%"></div>
+                            </div>
+                            <div class="score-number">87</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 能力雷达图 -->
+                <div class="radar-chart-container">
+                    <h3>能力雷达图</h3>
+                    <div class="radar-chart" id="radar-chart">
+                        <canvas id="radar-canvas" width="400" height="400"></canvas>
+                    </div>
+                </div>
+
+                <!-- 详细分析 -->
+                <div class="detailed-analysis">
+                    <h3>详细分析报告</h3>
+                    <div class="analysis-tabs">
+                        <button class="tab-btn active" data-tab="voice">语音分析</button>
+                        <button class="tab-btn" data-tab="video">视频分析</button>
+                        <button class="tab-btn" data-tab="content">内容分析</button>
+                    </div>
+                    <div class="tab-content">
+                        <div class="tab-panel active" id="voice-analysis">
+                            <div class="analysis-item">
+                                <h4>语言流畅度</h4>
+                                <div class="analysis-score">良好 (85分)</div>
+                                <p>语速适中，停顿合理，整体表达较为流畅。建议减少口头禅的使用。</p>
+                            </div>
+                            <div class="analysis-item">
+                                <h4>语调变化</h4>
+                                <div class="analysis-score">优秀 (92分)</div>
+                                <p>语调富有变化，重点突出明确，能够很好地传达情感和重点信息。</p>
+                            </div>
+                        </div>
+                        <div class="tab-panel" id="video-analysis">
+                            <div class="analysis-item">
+                                <h4>面部表情</h4>
+                                <div class="analysis-score">良好 (80分)</div>
+                                <p>表情自然，眼神交流良好。建议保持更多的微笑，增强亲和力。</p>
+                            </div>
+                            <div class="analysis-item">
+                                <h4>肢体语言</h4>
+                                <div class="analysis-score">良好 (83分)</div>
+                                <p>坐姿端正，手势适当。建议减少不必要的小动作。</p>
+                            </div>
+                        </div>
+                        <div class="tab-panel" id="content-analysis">
+                            <div class="analysis-item">
+                                <h4>专业知识掌握</h4>
+                                <div class="analysis-score">优秀 (90分)</div>
+                                <p>对机器学习概念理解准确，能够举出恰当的例子说明。</p>
+                            </div>
+                            <div class="analysis-item">
+                                <h4>逻辑结构</h4>
+                                <div class="analysis-score">良好 (82分)</div>
+                                <p>回答有一定的逻辑性，但可以进一步优化结构，使表达更加清晰。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 改进建议 -->
+                <div class="improvement-suggestions">
+                    <h3>改进建议</h3>
+                    <div class="suggestions-list">
+                        <div class="suggestion-item">
+                            <div class="suggestion-icon">
+                                <i class="fas fa-lightbulb"></i>
+                            </div>
+                            <div class="suggestion-content">
+                                <h4>提升应变能力</h4>
+                                <p>建议多练习压力面试题目，提高在突发情况下的应对能力。</p>
+                                <a href="#" class="suggestion-link">查看相关练习 <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="suggestion-item">
+                            <div class="suggestion-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="suggestion-content">
+                                <h4>加强项目经历表达</h4>
+                                <p>建议使用STAR法则（情境、任务、行动、结果）来组织项目经历的表达。</p>
+                                <a href="#" class="suggestion-link">学习STAR法则 <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 操作按钮 -->
+                <div class="result-actions">
+                    <button class="btn btn-outline" id="save-report">
+                        <i class="fas fa-download"></i>
+                        下载报告
+                    </button>
+                    <button class="btn btn-secondary" id="share-result">
+                        <i class="fas fa-share"></i>
+                        分享结果
+                    </button>
+                    <button class="btn btn-primary" id="practice-again">
+                        <i class="fas fa-redo"></i>
+                        再次练习
+                    </button>
+                    <a href="dashboard.html" class="btn btn-primary">
+                        <i class="fas fa-chart-line"></i>
+                        查看成长记录
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 笔记弹窗 -->
+    <div id="notes-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>面试笔记</h3>
+                <button class="close-btn" id="close-notes">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <textarea id="notes-textarea" placeholder="在这里记录您的想法和要点..."></textarea>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" id="save-notes">保存笔记</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/global-logout.js"></script>
+    <script src="js/interview.js"></script>
+    <script src="js/radar-chart.js"></script>
+</body>
+</html>
